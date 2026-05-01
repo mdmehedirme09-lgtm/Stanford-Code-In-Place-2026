@@ -1,56 +1,37 @@
 from karel.stanfordkarel import *
 
-"""
-File: main.py
---------------------
-When you finish writing this file, Karel should be able to find
-the midpoint
-"""
-# Stanford Karel: Unit 12: Lesson 1
-# Karel finds the midpoint in the world. It is not the center.
-
-# Stanford Karel: Unit 12: Lesson 1
-# Karel finds the midpoint in the world. It is not the center.
-# Stanford Karel: Unit 12: Lesson 1
-# Karel finds the midpoint in the world. It is not the center.
-
-
-
+#define main function using 5 other function
+#We solve it through Decomposition
 def main():
+    #function_1
+    #mark walls by adding beeper beside the two wall
     mark_walls()
+    #function_2
+    #fill the bottom row with beeper
     put_beepers_down()
-    turn_around()
-    move()
-    put_beeper()
-    turn_around()
+    """
+    put one more beeper on the middle of the row
+    as we later pick all the beeper & the one become remaining!!
+    """
+    #function_3
+    put_one_more_beeper()
+    #move untill reach to the wall
     go_to_wall()
     turn_around()
+    #function_4
+    #pick_bepper from the bottom row once in each column
     last_beeper_standing()
+    #function_5
+    #At last the karel position over the beeper facing east
     stay_with_beeper()
-#karel saty with beepers in the middle column    
-def stay_with_beeper():
-    turn_around()
-    while no_beepers_present():
-        move()
-    
-    if not_facing_east():
-        turn_around()    
-
-# Karel moves to end walls, marking them with beepers
 def mark_walls():
     go_to_wall()
-    put_beeper()
+    put_beeper()#at right_most wall
     turn_around()
     go_to_wall()
-    put_beeper()
+    put_beeper()#at-left_most wall
     turn_around()
     move()
-#karel moves until find a block infron of it
-def go_to_wall():
-    while front_is_clear():
-        move()
-
-# Karel starts putting beepers down to find the midpoint of the world.
 def put_beepers_down():
     while no_beepers_present():
         move()
@@ -59,19 +40,33 @@ def put_beepers_down():
             move()
             put_beeper()
             move()
-#karel find the last beeper
+def put_one_more_beeper():
+    turn_around()
+    move()
+    put_beeper()
+    turn_around()   
 def last_beeper_standing():
     while front_is_clear():
         if beepers_present():
             pick_beeper()
         move()
-    pick_beeper()
+    pick_beeper()  
+def stay_with_beeper():
+    turn_around()
+    while no_beepers_present():
+        move()
+    #force to facing east
+    if not_facing_east():
+        turn_around()
+        #Done                 
 
-#karel rotates 180 degree 
+def go_to_wall():
+    while front_is_clear():
+        move()
+#rotate the karel by 180 degree
 def turn_around():
     turn_left()
-    turn_left()
-
+    turn_left()        
 
 
 if __name__ == '__main__':
